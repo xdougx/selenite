@@ -86,14 +86,14 @@ module Application
     def start_application(&block)
       Process.fork do |process|
         init(process)
-        block.call
+        block.call(self)
       end
     end
 
     def start_server(&block)
       Process.fork do |process| 
         init(process)
-        block.call
+        block.call(self)
       end
     end
 
