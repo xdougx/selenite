@@ -1,7 +1,6 @@
 # application
 
-This lib will build an application runner, you will be able to start and stop your application
-via command line
+This lib will build an application runner, you will be able to start and stop your application via command line
 
 ## Installation
 
