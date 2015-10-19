@@ -1,4 +1,3 @@
-require "./class_property"
 module Application
   module Controller
 
@@ -64,9 +63,14 @@ module Application
 
     # stop the process started
     def stop
-      pid = `cat #{pid_file}`.chomp
-      Process.kill(Signal::TERM, pid.to_i)
-      puts "Stopped #{kind} on env #{env} with pid #{pid}"
+      begin
+        pid = `cat #{pid_file}`.chomp
+        Process.kill(Signal::TERM, pid.to_i)
+        File.delete(pid_file)
+        puts "Stopped #{kind} on env #{env} with pid #{pid}"
+      rescue e
+        puts "This application is not running"
+      end
     end
 
     # get the full pid file
@@ -82,19 +86,19 @@ module Application
     def start_application(&block)
       Process.fork do |process|
         init(process)
-        yield
+        block.call
       end
     end
 
     def start_server(&block)
       Process.fork do |process| 
         init(process)
-        yield
+        block.call
       end
     end
 
     def init(process)
-      @logger.log(Logger::INFO, "Starting Process with PID #{process.pid}", kind)
+      @logger.info("Starting Process with PID #{process.pid}", kind)
       build_pid(process.pid)
     end
 
@@ -103,6 +107,5 @@ module Application
         file << pid
       end
     end
-
   end
 end
