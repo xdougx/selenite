@@ -50,7 +50,7 @@ module Selenite
     end
     
     # initiate the application and run a procces server or application
-    def start(&block : Application::Base)
+    def start(&block : self ->)
       return stop if stop?      
       
       if running?
@@ -84,7 +84,7 @@ module Selenite
       @environment["PWD"]
     end
 
-    def start_application(&block)
+    def start_application(&block : self ->)
       Process.fork do |process|
         init(process)
         yield(self)
