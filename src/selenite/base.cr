@@ -2,14 +2,14 @@ require "logger"
 require "./controller"
 require "./configuration"
 
-module Application
+module Selenite
   class Base
     property(arguments)
     property(environment)
     property(logger)
     getter(env)
 
-    include Application::Controller 
+    include Selenite::Controller 
 
     def initialize(@arguments, @environment)
       @logger = Logger.new(File.open("#{root}/log/#{env}.log", "a+"))

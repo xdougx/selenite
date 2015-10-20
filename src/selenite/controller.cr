@@ -1,6 +1,5 @@
-module Application
+module Selenite
   module Controller
-
     # available environments
     ENVS = %w(test development production staging)
 
