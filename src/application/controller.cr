@@ -67,8 +67,10 @@ module Application
         pid = `cat #{pid_file}`.chomp
         Process.kill(Signal::TERM, pid.to_i)
         File.delete(pid_file)
+        @logger.info("Stopped #{kind} on env #{env} with pid #{pid}", kind)
         puts "Stopped #{kind} on env #{env} with pid #{pid}"
       rescue e
+        @logger.info("This application is not running", kind)
         puts "This application is not running"
       end
     end
@@ -86,14 +88,14 @@ module Application
     def start_application(&block)
       Process.fork do |process|
         init(process)
-        block.call(self)
+        yield(self)
       end
     end
 
     def start_server(&block)
       Process.fork do |process| 
         init(process)
-        block.call(self)
+        yield(self)
       end
     end
 
