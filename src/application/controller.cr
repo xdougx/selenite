@@ -51,7 +51,7 @@ module Application
     end
     
     # initiate the application and run a procces server or application
-    def start(&block)
+    def start(&block : Application::Base)
       return stop if stop?      
       
       if running?
