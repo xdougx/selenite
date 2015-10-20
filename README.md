@@ -4,7 +4,6 @@ This lib will build an application runner, you will be able to start and stop yo
 
 ## Installation
 
-
 Add this to your application's `shard.yml`:
 
 ```yaml
@@ -13,16 +12,15 @@ dependencies:
     github: xdougx/application
 ```
 
-
 ## Usage
 
 
 ```crystal
 require "application"
 ```
+### Setup your project
 
-
-TODO: Write usage instructions here
+TODO: setup info
 
 ## Development
 
