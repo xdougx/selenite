@@ -7,7 +7,6 @@ module Selenite
     property(arguments)
     property(environment)
     property(logger)
-    getter(env)
 
     include Selenite::Controller 
 
