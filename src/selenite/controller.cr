@@ -88,13 +88,15 @@ module Selenite
       Process.fork do |process|
         init(process)
         yield(self)
+        puts "Starting Application with #{process.pid}"
       end
     end
 
-    def start_server(&block)
+    def start_server(&block : self ->)
       Process.fork do |process| 
         init(process)
         yield(self)
+        puts "Starting Server with #{process.pid}"
       end
     end
 
